@@ -1,0 +1,111 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+@import 'tailwindcss';
+
+@theme {
+  --font-sans: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: ui-monospace, 'Cascadia Code', 'Fira Code', Consolas, monospace;
+  /* 参考图：柔和粉、白、炭黑 */
+  --color-ink: #1a1a1a;
+  --color-ink-muted: #4a4a4a;
+  --color-blush: #fad0c4;
+  --color-blush-soft: #fce8e4;
+  --color-canvas: #fef6f4;
+}
+
+@layer base {
+  html,
+  body,
+  #root {
+    height: 100%;
+    margin: 0;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    color: var(--color-ink);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer utilities {
+  .app-backdrop {
+    background:
+      radial-gradient(
+        ellipse 85% 55% at 18% 35%,
+        rgb(250 208 196 / 0.5),
+        transparent 52%
+      ),
+      radial-gradient(
+        ellipse 65% 50% at 88% 75%,
+        rgb(255 230 224 / 0.85),
+        transparent 48%
+      ),
+      linear-gradient(
+        168deg,
+        #fffefc 0%,
+        var(--color-blush-soft) 42%,
+        rgb(252 232 228) 100%
+      );
+  }
+
+  .glass-bar {
+    background: rgb(255 255 255 / 0.42);
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
+    border: 1px solid rgb(255 255 255 / 0.65);
+    box-shadow:
+      0 4px 24px rgb(250 208 196 / 0.18),
+      0 1px 2px rgb(255 255 255 / 0.8) inset;
+  }
+
+  .glass-panel-light {
+    background: rgb(255 255 255 / 0.38);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgb(255 255 255 / 0.55);
+    box-shadow:
+      0 8px 40px rgb(26 26 26 / 0.06),
+      0 2px 12px rgb(250 208 196 / 0.12);
+  }
+
+  .glass-panel-dark {
+    background: rgb(36 36 40 / 0.78);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid rgb(255 255 255 / 0.08);
+    box-shadow:
+      0 12px 40px rgb(0 0 0 / 0.14),
+      0 2px 0 rgb(255 255 255 / 0.04) inset;
+  }
+
+  .glass-alert-warn {
+    background: rgb(255 252 245 / 0.7);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgb(253 230 200 / 0.6);
+    box-shadow: 0 4px 20px rgb(250 208 196 / 0.15);
+  }
+
+  .glass-alert-error {
+    background: rgb(255 248 248 / 0.72);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgb(252 202 202 / 0.55);
+    box-shadow: 0 4px 20px rgb(239 68 68 / 0.08);
+  }
+
+  .shadow-soft-cta {
+    box-shadow:
+      0 8px 24px rgb(26 26 26 / 0.18),
+      0 2px 8px rgb(250 208 196 / 0.35);
+  }
+}
