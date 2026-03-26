@@ -1,33 +1,46 @@
-/// <reference types="vite/client" />
+declare global {
+  interface SpeechRecognitionAlternative {
+    transcript: string
+  }
 
-/** Web Speech API（Chrome：`webkitSpeechRecognition`） */
-interface SpeechRecognition extends EventTarget {
-  continuous: boolean
-  interimResults: boolean
-  lang: string
-  start(): void
-  stop(): void
-  abort(): void
-  onresult: ((this: SpeechRecognition, ev: SpeechRecognitionEvent) => void) | null
-  onerror: ((this: SpeechRecognition, ev: SpeechRecognitionErrorEvent) => void) | null
-  onend: ((this: SpeechRecognition, ev: Event) => void) | null
+  interface SpeechRecognitionResult {
+    isFinal: boolean
+    [index: number]: SpeechRecognitionAlternative
+  }
+
+  interface SpeechRecognitionResultList {
+    length: number
+    [index: number]: SpeechRecognitionResult
+  }
+
+  interface SpeechRecognitionEvent extends Event {
+    resultIndex: number
+    results: SpeechRecognitionResultList
+  }
+
+  interface SpeechRecognitionErrorEvent extends Event {
+    error: string
+  }
+
+  interface SpeechRecognition extends EventTarget {
+    continuous: boolean
+    interimResults: boolean
+    lang: string
+    onresult: ((event: SpeechRecognitionEvent) => void) | null
+    onerror: ((event: SpeechRecognitionErrorEvent) => void) | null
+    onend: (() => void) | null
+    start(): void
+    stop(): void
+  }
+
+  interface SpeechRecognitionConstructor {
+    new (): SpeechRecognition
+  }
+
+  interface Window {
+    SpeechRecognition?: SpeechRecognitionConstructor
+    webkitSpeechRecognition?: SpeechRecognitionConstructor
+  }
 }
 
-interface SpeechRecognitionEvent extends Event {
-  readonly resultIndex: number
-  readonly results: SpeechRecognitionResultList
-}
-
-interface SpeechRecognitionErrorEvent extends Event {
-  readonly error: string
-  readonly message: string
-}
-
-interface SpeechRecognitionConstructor {
-  new (): SpeechRecognition
-}
-
-interface Window {
-  SpeechRecognition?: SpeechRecognitionConstructor
-  webkitSpeechRecognition?: SpeechRecognitionConstructor
-}
+export {}

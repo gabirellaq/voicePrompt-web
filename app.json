@@ -1,0 +1,18 @@
+{
+  "expo": {
+    "name": "voiceprompt-native",
+    "slug": "voiceprompt-native",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "assetBundlePatterns": ["**/*"],
+    "plugins": ["expo-speech-recognition"],
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {},
+    "web": {
+      "bundler": "metro"
+    }
+  }
+}

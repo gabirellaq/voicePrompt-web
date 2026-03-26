@@ -1,4 +1,4 @@
-# voiceprompt-web
+# voiceprompt-RN
 将口述的想法转换为结构化的提示词（Prompt）
 
 
@@ -8,14 +8,14 @@
 ## 快速使用
 
 ```bash
-npm install
-npm run build
-npm run dev
+npm run ios
+npm run addroid
+npm run web
 ```
 
 ## 技术栈
-- React, Vite, Tailwind CSS, Lucide React(图标)
-- 原生的 “Window.SpedchRecognition” 或 “Window.webkitSpeechRecognition” 事件
+- React Native, Tailwind CSS, Lucide React(图标)
+- 原生的 “Window.SpedchRecognition” 或 “Window.webkitSpeechRecognition” 事件、expo-speech-recognition实现IOS/Android端真机录音识别功能
 
 ## 模型（LLM）
 在 `.env` 文件中配置

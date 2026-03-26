@@ -17,9 +17,9 @@ export async function optimizePromptWithLLM(
   onStreamChunk?: (chunk: string) => void,
   opts?: { signal?: AbortSignal; timeoutMs?: number },
 ): Promise<string> {
-  const env = import.meta.env as unknown as Record<string, string | undefined>
-  const baseUrl = env.VITE_LLM_BASE_URL
-  const model = env.VITE_LLM_MODEL
+  const env = process.env as Record<string, string | undefined>
+  const baseUrl = env.EXPO_PUBLIC_LLM_BASE_URL
+  const model = env.EXPO_PUBLIC_LLM_MODEL
 
   const userText = rawTranscript.trim()
   if (!userText) {
@@ -27,10 +27,10 @@ export async function optimizePromptWithLLM(
   }
 
   if (!baseUrl) {
-    throw new Error('未配置 VITE_LLM_BASE_URL，无法请求 LLM。')
+    throw new Error('未配置 EXPO_PUBLIC_LLM_BASE_URL，无法请求 LLM。')
   }
   if (!model) {
-    throw new Error('未配置 VITE_LLM_MODEL，无法请求 LLM。')
+    throw new Error('未配置 EXPO_PUBLIC_LLM_MODEL，无法请求 LLM。')
   }
 
   // 尽量使用“OpenAI 兼容”的 chat/completions 形式；若你的服务不是该路由，可改这里。
@@ -55,13 +55,13 @@ export async function optimizePromptWithLLM(
     stream: true,
   }
 
-  const apiKey = env.VITE_LLM_API_KEY
+  const apiKey = env.EXPO_PUBLIC_LLM_API_KEY
   const headers: Record<string, string> = { 'Content-Type': 'application/json' }
   if (apiKey) headers.Authorization = `Bearer ${apiKey}`
 
   const controller = new AbortController()
   const timeoutMs = opts?.timeoutMs ?? 180_000
-  const timeoutId = window.setTimeout(() => controller.abort(), timeoutMs)
+  const timeoutId = setTimeout(() => controller.abort(), timeoutMs)
   const externalSignal = opts?.signal
   const onExternalAbort = () => controller.abort()
   if (externalSignal) {
@@ -217,7 +217,7 @@ export async function optimizePromptWithLLM(
     const msg = lastErr instanceof Error ? lastErr.message : 'LLM 请求失败'
     throw new Error(msg)
   } finally {
-    window.clearTimeout(timeoutId)
+    clearTimeout(timeoutId)
     if (externalSignal) externalSignal.removeEventListener('abort', onExternalAbort)
   }
 }
