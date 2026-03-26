@@ -3,7 +3,7 @@
 
 
 ## 预览截图
-![预览截图](./screenshot/demo.png)
+![预览截图](./screenshot/rn-demo.png)
 
 ## 快速使用
 
