@@ -30,4 +30,7 @@ interface SpeechRecognitionConstructor {
 interface Window {
   SpeechRecognition?: SpeechRecognitionConstructor
   webkitSpeechRecognition?: SpeechRecognitionConstructor
+  electron?: {
+    platform: NodeJS.Platform
+  }
 }

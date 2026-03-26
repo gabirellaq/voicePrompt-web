@@ -1,16 +1,16 @@
-# voiceprompt-web
-将口述的想法转换为结构化的提示词（Prompt）
+# voiceprompt-electron
+将口述的想法转换为结构化的提示词（Prompt）桌面版
 
 
 ## 预览截图
-![预览截图](./screenshot/demo.png)
+![预览截图](./screenshot/electron-demo.png)
 
 ## 快速使用
 
 ```bash
 npm install
 npm run build
-npm run dev
+npm run electron:start"
 ```
 
 ## 技术栈
